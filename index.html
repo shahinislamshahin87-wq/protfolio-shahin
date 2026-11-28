@@ -1,270 +1,236 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SHAHIN ORGANIK FOOD – খাঁটি মধু</title>
-<meta name="description" content="সুন্দরবনের খাঁটি মধু – সরাসরি শাহিন অর্গানিক ফুড থেকে। সারা বাংলাদেশে হোম ডেলিভারি।">
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Noto+Serif+Bengali:wght@600;800&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  theme: { extend: {
-    colors: { honey:'#E8A317', amber2:'#B9770E', comb:'#FFF6DC', bark:'#3B2412', leaf:'#2F6B3A' },
-    fontFamily: { body:['"Hind Siliguri"','sans-serif'], head:['"Noto Serif Bengali"','serif'] }
-  } }
-}
-</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>হালাল অর্গানিক — অ্যাডমিন ড্যাশবোর্ড</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  html{scroll-behavior:smooth}
-  body{font-family:'Hind Siliguri',sans-serif}
-  .font-head{font-family:'Noto Serif Bengali',serif}
-  /* হিরোতে products.jpg-র উপরের বাম অংশ (মধুর জার) কেটে দেখানো হয় */
-  .honey-crop{background:url('images/products.jpg') 0 0/200% 200% no-repeat}
-  @media (prefers-color-scheme:dark){
-    body{background:#1d130b;color:#f3e6cf}
-    .card{background:#2a1c10!important;border-color:#4a3320!important;color:#f3e6cf}
-    .soft{background:#24170d!important}
-    .muted{color:#cdb894!important}
-    input,select,textarea{background:#1d130b!important;color:#f3e6cf!important;border-color:#5a4028!important}
-  }
+:root{--p:#15803d;--ps:#e7f4ec;--bg:#f5f7f6;--card:#fff;--tx:#17221b;--mu:#66736b;--bd:#e3e8e5;--red:#b91c1c;--rs:#fdeaea;--am:#92600a;--as:#fdf3da;--bl:#1d4ed8;--bs:#e8eefc}
+body.dark{--p:#4ade80;--ps:#16301f;--bg:#0e1411;--card:#161e1a;--tx:#e7eee9;--mu:#94a39a;--bd:#27332c;--red:#fca5a5;--rs:#3a1a1a;--am:#fcd34d;--as:#362a0d;--bl:#93c5fd;--bs:#172444}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hind Siliguri',system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:15px;line-height:1.5}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+aside{position:fixed;inset:0 auto 0 0;width:230px;background:var(--card);border-right:1px solid var(--bd);padding:16px 12px;overflow-y:auto;z-index:30;transition:transform .25s}
+.logo{font-size:20px;font-weight:700;color:var(--p);padding:4px 10px 16px}
+nav button{display:flex;gap:10px;width:100%;padding:9px 12px;border:0;background:none;border-radius:9px;text-align:left}
+nav button:hover{background:var(--bg)}
+nav button.on{background:var(--ps);color:var(--p);font-weight:600}
+.main{margin-left:230px;min-width:0}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:12px 24px;background:var(--card);border-bottom:1px solid var(--bd)}
+.ic{border:1px solid var(--bd);background:none;border-radius:9px;min-width:40px;height:40px;position:relative}
+#menu{display:none}
+#search{flex:1;max-width:420px;min-width:0;height:40px;border:1px solid var(--bd);background:var(--bg);border-radius:9px;padding:0 14px}
+.sp{flex:1}
+.dot{position:absolute;top:-6px;right:-6px;background:#dc2626;color:#fff;border-radius:20px;font-size:11px;padding:0 6px}
+.admin{display:flex;align-items:center;gap:8px}
+.av{width:40px;height:40px;border-radius:50%;background:var(--p);color:var(--card);display:grid;place-items:center;font-weight:700}
+.admin small{display:block;color:var(--mu);line-height:1.2}
+main{padding:24px;max-width:1300px;margin:auto}
+h1{font-size:24px}h2{font-size:17px;margin-bottom:14px}
+.sub{color:var(--mu);margin-bottom:20px}
+.grid{display:grid;gap:18px;margin-bottom:18px}
+.g4{grid-template-columns:repeat(4,1fr)}.g2{grid-template-columns:2fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;min-width:0}
+.stat b{display:block;font-size:30px;line-height:1.3}
+.stat span,.mu{color:var(--mu)}
+.stat small{color:var(--p)}.stat small.down{color:var(--red)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;white-space:nowrap}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--bd)}
+th{color:var(--mu);font-weight:500;font-size:13px}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:13px;font-weight:600;background:var(--bs);color:var(--bl)}
+.green{background:var(--ps);color:var(--p)}.red{background:var(--rs);color:var(--red)}.amber{background:var(--as);color:var(--am)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd)}
+.row:last-child{border:0}
+.bar{height:7px;background:var(--bg);border-radius:9px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--p)}
+.btn{background:var(--p);color:var(--card);border:0;border-radius:9px;padding:8px 16px;font-weight:600}
+.btn.alt{background:var(--bg);color:var(--tx);border:1px solid var(--bd);padding:4px 10px;font-weight:500}
+select,.field{border:1px solid var(--bd);background:var(--card);border-radius:8px;padding:6px 10px;min-width:0}
+form{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+svg text{fill:var(--mu);font-size:11px}
+.head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+#shade{display:none;position:fixed;inset:0;background:#0007;z-index:25}
+#notes{display:none;position:fixed;right:16px;top:70px;width:min(340px,calc(100vw - 32px));z-index:40;box-shadow:0 12px 30px #0003}
+@media(max-width:1100px){.g4{grid-template-columns:repeat(2,1fr)}.g2,.g3{grid-template-columns:1fr}}
+@media(max-width:800px){aside{transform:translateX(-100%)}body.open aside{transform:none}body.open #shade{display:block}.main{margin:0}#menu{display:block}header{padding:10px 12px;gap:8px}main{padding:16px}.admin div:last-child{display:none}.stat b{font-size:23px}.card{padding:14px}svg text{font-size:18px}.grid{gap:12px}}
 </style>
 </head>
-<body class="bg-comb text-bark antialiased">
-
-<!-- ======= HERO ======= -->
-<header class="bg-gradient-to-b from-honey/40 to-comb">
-  <div class="max-w-5xl mx-auto px-5 pt-8 pb-10 text-center">
-    <h1 class="font-head font-extrabold text-4xl sm:text-6xl tracking-tight text-amber2 leading-tight">SHAHIN ORGANIK FOOD</h1>
-    <p class="muted mt-2 text-sm sm:text-base text-bark/70">কামারপুর, গোবিন্দগঞ্জ, গাইবান্ধা</p>
-
-    <div class="mt-8 grid md:grid-cols-2 gap-8 items-center text-left">
-      <div class="honey-crop aspect-[704/384] w-full rounded-3xl shadow-xl ring-4 ring-honey/50" role="img" aria-label="খাঁটি মধুর জার ও মৌচাক"></div>
-      <div>
-        <h2 class="font-head font-extrabold text-3xl sm:text-4xl leading-snug">সুন্দরবনের খাঁটি মধু, সরাসরি আপনার ঘরে</h2>
-        <p class="muted mt-4 text-lg text-bark/80">কোনো চিনি নেই, কোনো রং নেই, কোনো ভেজাল নেই। যেমন পাওয়া, তেমনই পৌঁছে দিই।</p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a href="#order" class="bg-leaf text-white font-semibold px-7 py-3 rounded-full shadow hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-leaf/40">এখনই অর্ডার করুন</a>
-          <a href="tel:01737924525" class="border-2 border-leaf text-leaf font-semibold px-7 py-3 rounded-full hover:bg-leaf hover:text-white">কল করুন: ০১৭৩৭৯২৪৫২৫</a>
-        </div>
-        <div class="mt-5 flex items-center gap-3">
-          <img src="images/shahin.jpg" alt="শাহিন ইসলাম" class="w-14 h-14 rounded-full object-cover object-top ring-2 ring-honey">
-          <p class="text-sm"><b>শাহিন ইসলাম</b><br><span class="muted text-bark/70">সরাসরি আমার কাছ থেকে নিন</span></p>
-        </div>
-        <p class="mt-4 text-sm font-medium text-leaf">ঢাকায় ডেলিভারি ৮০ টাকা · ঢাকার বাইরে ১২০ টাকা</p>
-      </div>
-    </div>
-  </div>
+<body>
+<aside><div class="logo">🌿 হালাল অর্গানিক</div><nav id="nav"></nav></aside>
+<div id="shade"></div>
+<div class="main">
+<header>
+ <button class="ic" id="menu" aria-label="মেনু">☰</button>
+ <input id="search" type="search" placeholder="অর্ডার, পণ্য বা কাস্টমার খুঁজুন…">
+ <div class="sp"></div>
+ <button class="ic" id="theme" aria-label="ডার্ক মোড">🌙</button>
+ <button class="ic" id="bell" aria-label="নোটিফিকেশন">🔔<span class="dot" id="count"></span></button>
+ <div class="admin"><div class="av">আ</div><div><b>আরিফ হোসেন</b><small>অ্যাডমিন</small></div></div>
 </header>
-
-<main>
-<!-- ======= BENEFITS ======= -->
-<section class="max-w-5xl mx-auto px-5 py-14">
-  <h2 class="font-head font-extrabold text-3xl text-center">কেন খাঁটি মধু খাবেন?</h2>
-  <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-    <div class="card bg-white border border-honey/30 rounded-2xl p-5"><h3 class="font-semibold text-lg text-amber2">শক্তি ও প্রাণচাঞ্চল্য</h3><p class="muted mt-2 text-bark/75">প্রাকৃতিক চিনি দেয় দ্রুত ও টেকসই এনার্জি। সকালে এক চামচ শুরু করুন।</p></div>
-    <div class="card bg-white border border-honey/30 rounded-2xl p-5"><h3 class="font-semibold text-lg text-amber2">সর্দি-কাশিতে আরাম</h3><p class="muted mt-2 text-bark/75">গলা ব্যথা ও কাশিতে গরম পানি বা আদা চায়ের সাথে মধু আরাম দেয়।</p></div>
-    <div class="card bg-white border border-honey/30 rounded-2xl p-5"><h3 class="font-semibold text-lg text-amber2">চিনির সুস্থ বিকল্প</h3><p class="muted mt-2 text-bark/75">চা, দুধ, লেবু-পানিতে চিনির বদলে মধু ব্যবহার করুন।</p></div>
-    <div class="card bg-white border border-honey/30 rounded-2xl p-5"><h3 class="font-semibold text-lg text-amber2">ত্বকের যত্নে</h3><p class="muted mt-2 text-bark/75">ফেসপ্যাক হিসেবে ব্যবহার করলে ত্বক নরম ও উজ্জ্বল থাকে।</p></div>
-  </div>
-  <p class="muted text-center text-xs mt-4 text-bark/60">* মধু ওষুধ নয়। বিশেষ স্বাস্থ্যসমস্যা থাকলে চিকিৎসকের পরামর্শ নিন। ১ বছরের কম বয়সী শিশুকে মধু দেবেন না।</p>
-</section>
-
-<!-- ======= GUARANTEE / PURITY ======= -->
-<section class="soft bg-honey/20 py-14">
-  <div class="max-w-5xl mx-auto px-5">
-    <h2 class="font-head font-extrabold text-3xl text-center">আমাদের নিশ্চয়তা</h2>
-    <p class="muted text-center mt-3 text-bark/75">মধুর উৎস, সংগ্রহ ও পরীক্ষার তথ্য আমরা লুকাই না।</p>
-    <div class="mt-8 grid md:grid-cols-3 gap-5">
-      <div class="card bg-white rounded-2xl p-6 border border-honey/30"><h3 class="font-semibold text-lg text-leaf">সুন্দরবন থেকে সংগ্রহ</h3><p class="muted mt-2 text-bark/75">সরাসরি মৌয়ালদের কাছ থেকে সংগ্রহ করা মধু।</p></div>
-      <div class="card bg-white rounded-2xl p-6 border border-honey/30"><h3 class="font-semibold text-lg text-leaf">পরীক্ষার রিপোর্ট</h3><p class="muted mt-2 text-bark/75">চাইলে মধুর ল্যাব পরীক্ষার রিপোর্ট দেখাতে পারি। হোয়াটসঅ্যাপে জানান।</p></div>
-      <div class="card bg-white rounded-2xl p-6 border border-honey/30"><h3 class="font-semibold text-lg text-leaf">পছন্দ না হলে ফেরত</h3><p class="muted mt-2 text-bark/75">পণ্যে সমস্যা থাকলে ডেলিভারির পর ফেরত বা বদলে দেওয়া হবে।</p></div>
-    </div>
-
-    <h3 class="font-head font-extrabold text-2xl mt-12 text-center">ঘরে বসে খাঁটি মধু চেনার উপায়</h3>
-    <ul class="mt-6 grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
-      <li class="card bg-white rounded-xl p-4 border border-honey/30"><b>পানির পরীক্ষা:</b> এক গ্লাস পানিতে এক চামচ মধু দিন। খাঁটি মধু না গুলে নিচে জমে যায়।</li>
-      <li class="card bg-white rounded-xl p-4 border border-honey/30"><b>আঙুলের পরীক্ষা:</b> আঙুলে একটু মধু নিন। খাঁটি মধু গড়িয়ে পড়ে না, ঘন থাকে।</li>
-      <li class="card bg-white rounded-xl p-4 border border-honey/30"><b>ফ্রিজের পরীক্ষা:</b> ঠান্ডায় খাঁটি মধু জমাট বাঁধতে পারে, এটা স্বাভাবিক।</li>
-      <li class="card bg-white rounded-xl p-4 border border-honey/30"><b>গন্ধ ও স্বাদ:</b> প্রাকৃতিক ফুলের মৃদু গন্ধ থাকে, কৃত্রিম মিষ্টি গন্ধ নয়।</li>
-    </ul>
-    <p class="muted text-center text-xs mt-3 text-bark/60">* ঘরোয়া পরীক্ষা নির্দেশক মাত্র, চূড়ান্ত প্রমাণ ল্যাব রিপোর্ট।</p>
-  </div>
-</section>
-
-<!-- ======= PACKAGES ======= -->
-<section class="max-w-5xl mx-auto px-5 py-14">
-  <h2 class="font-head font-extrabold text-3xl text-center">প্যাকেজ ও দাম</h2>
-  <!-- দাম এখানে বদলান: ফর্মের হিসাবও এখান থেকেই হয় -->
-  <div id="pkgs" class="mt-8 grid sm:grid-cols-3 gap-5"></div>
-  <p class="muted text-center mt-5 text-bark/70">ডেলিভারি চার্জ: ঢাকায় ৮০ টাকা, ঢাকার বাইরে ১২০ টাকা।</p>
-</section>
-
-<!-- ======= REVIEWS ======= -->
-<section class="soft bg-honey/20 py-14">
-  <div class="max-w-5xl mx-auto px-5">
-    <h2 class="font-head font-extrabold text-3xl text-center">ক্রেতারা কী বলছেন</h2>
-    <div id="reviews" class="mt-8 grid md:grid-cols-3 gap-5"></div>
-  </div>
-</section>
-
-<!-- ======= ABOUT ======= -->
-<section class="max-w-5xl mx-auto px-5 py-14">
-  <div class="grid md:grid-cols-[260px_1fr] gap-8 items-center">
-    <img src="images/shahin.jpg" alt="শাহিন ইসলাম, SHAHIN ORGANIK FOOD" class="rounded-3xl shadow-lg w-full max-w-xs mx-auto aspect-[3/4] object-cover" loading="lazy">
-    <div>
-      <h2 class="font-head font-extrabold text-3xl">আমাদের কথা</h2>
-      <p class="muted mt-3 text-lg text-bark/80">গ্রামের ভেজালমুক্ত খাবার শহরের মানুষের কাছে পৌঁছে দিতে শুরু করেছি SHAHIN ORGANIK FOOD। মধুর পাশাপাশি আমরা খেজুরগুড়, দেশি ঘি, সরিষার তেল, আচার ও বালাচাও-ও দিই।</p>
-      <p class="mt-3 font-semibold text-leaf">শাহিন ইসলাম, প্রতিষ্ঠাতা</p>
-    </div>
-  </div>
-</section>
-
-<!-- ======= ALL PRODUCTS ======= -->
-<section class="max-w-5xl mx-auto px-5 pb-14">
-  <h2 class="font-head font-extrabold text-3xl text-center">আমাদের অন্যান্য পণ্য</h2>
-  <p class="muted text-center mt-2 text-bark/70">পছন্দের পণ্যে চাপ দিলে হোয়াটসঅ্যাপে দাম জানতে পারবেন।</p>
-  <div id="gallery" class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-</section>
-
-<!-- ======= FAQ ======= -->
-<section class="max-w-3xl mx-auto px-5 pb-14">
-  <h2 class="font-head font-extrabold text-3xl text-center">সাধারণ প্রশ্ন</h2>
-  <div class="mt-8 space-y-3">
-    <details class="card bg-white border border-honey/30 rounded-xl p-4"><summary class="font-semibold cursor-pointer">ডেলিভারি পেতে কতদিন লাগে?</summary><p class="muted mt-2 text-bark/75">ঢাকায় ১–২ দিন, ঢাকার বাইরে ২–৪ দিন। (সময় আপনার প্রকৃত সময় অনুযায়ী বদলে নিন।)</p></details>
-    <details class="card bg-white border border-honey/30 rounded-xl p-4"><summary class="font-semibold cursor-pointer">পেমেন্ট কীভাবে করব?</summary><p class="muted mt-2 text-bark/75">ক্যাশ অন ডেলিভারি। পণ্য হাতে পেয়ে টাকা দেবেন।</p></details>
-    <details class="card bg-white border border-honey/30 rounded-xl p-4"><summary class="font-semibold cursor-pointer">মধু জমে গেলে কি নষ্ট হয়েছে?</summary><p class="muted mt-2 text-bark/75">না। ঠান্ডায় বা সময়ের সাথে মধু দানা বাঁধতে পারে। জারটি কুসুম গরম পানিতে কিছুক্ষণ রাখলেই আগের মতো হবে।</p></details>
-    <details class="card bg-white border border-honey/30 rounded-xl p-4"><summary class="font-semibold cursor-pointer">মধু কতদিন ভালো থাকে?</summary><p class="muted mt-2 text-bark/75">শুকনো ও ঠান্ডা জায়গায়, ঢাকনা শক্ত করে বন্ধ রাখলে অনেকদিন ভালো থাকে।</p></details>
-    <details class="card bg-white border border-honey/30 rounded-xl p-4"><summary class="font-semibold cursor-pointer">পণ্যে সমস্যা থাকলে কী করব?</summary><p class="muted mt-2 text-bark/75">০১৭৩৭৯২৪৫২৫ নম্বরে কল বা হোয়াটসঅ্যাপ করুন, আমরা ব্যবস্থা নেব।</p></details>
-  </div>
-</section>
-
-<!-- ======= ORDER FORM ======= -->
-<section id="order" class="bg-leaf py-14">
-  <div class="max-w-xl mx-auto px-5">
-    <h2 class="font-head font-extrabold text-3xl text-center text-white">অর্ডার করুন</h2>
-    <p class="text-center text-white/85 mt-2">ফর্ম পূরণ করলে হোয়াটসঅ্যাপে অর্ডারের মেসেজ তৈরি হবে।</p>
-    <div class="card bg-white text-bark rounded-3xl p-6 mt-6 shadow-xl space-y-4">
-      <div><label class="font-semibold" for="name">আপনার নাম</label><input id="name" class="mt-1 w-full border-2 border-honey/40 rounded-xl px-4 py-3 focus:outline-none focus:border-leaf" autocomplete="name"></div>
-      <div><label class="font-semibold" for="phone">মোবাইল নম্বর</label><input id="phone" type="tel" inputmode="tel" class="mt-1 w-full border-2 border-honey/40 rounded-xl px-4 py-3 focus:outline-none focus:border-leaf" autocomplete="tel"></div>
-      <div><label class="font-semibold" for="addr">পূর্ণ ঠিকানা</label><textarea id="addr" rows="2" class="mt-1 w-full border-2 border-honey/40 rounded-xl px-4 py-3 focus:outline-none focus:border-leaf" autocomplete="street-address"></textarea></div>
-      <div class="grid grid-cols-2 gap-4">
-        <div><label class="font-semibold" for="pkg">প্যাকেজ</label><select id="pkg" class="mt-1 w-full border-2 border-honey/40 rounded-xl px-3 py-3"></select></div>
-        <div><label class="font-semibold" for="qty">পরিমাণ</label><input id="qty" type="number" min="1" value="1" class="mt-1 w-full border-2 border-honey/40 rounded-xl px-4 py-3"></div>
-      </div>
-      <div><label class="font-semibold" for="area">ডেলিভারি এলাকা</label>
-        <select id="area" class="mt-1 w-full border-2 border-honey/40 rounded-xl px-3 py-3">
-          <option value="80">ঢাকার ভেতরে (৮০ টাকা)</option>
-          <option value="120">ঢাকার বাইরে (১২০ টাকা)</option>
-        </select></div>
-      <div class="soft bg-comb rounded-xl p-4 text-sm space-y-1">
-        <div class="flex justify-between"><span>পণ্যের দাম</span><b id="sub">০</b></div>
-        <div class="flex justify-between"><span>ডেলিভারি</span><b id="ship">০</b></div>
-        <div class="flex justify-between text-lg text-leaf"><span>মোট</span><b id="total">০</b></div>
-      </div>
-      <p id="err" class="text-red-600 text-sm hidden"></p>
-      <button id="send" class="w-full bg-[#25D366] text-white font-semibold text-lg py-3.5 rounded-full hover:brightness-95 focus:outline-none focus:ring-4 focus:ring-green-300">হোয়াটসঅ্যাপে অর্ডার পাঠান</button>
-    </div>
-  </div>
-</section>
-</main>
-
-<!-- ======= FOOTER ======= -->
-<footer class="bg-bark text-comb/90 py-10">
-  <div class="max-w-5xl mx-auto px-5 text-center space-y-1">
-    <p class="font-head font-extrabold text-2xl text-honey">SHAHIN ORGANIK FOOD</p>
-    <p>ঠিকানা: কামারপুর, গোবিন্দগঞ্জ, গাইবান্ধা</p>
-    <p>ফোন: <a class="underline" href="tel:01737924525">০১৭৩৭৯২৪৫২৫</a></p>
-    <p>ইমেইল: <a class="underline" href="mailto:shahinislamshahin87@gmail.com">shahinislamshahin87@gmail.com</a></p>
-  </div>
-</footer>
-
-<!-- ভাসমান হোয়াটসঅ্যাপ বাটন -->
-<a id="wa" href="#" target="_blank" rel="noopener" aria-label="হোয়াটসঅ্যাপে মেসেজ করুন" class="fixed bottom-5 right-5 z-50 bg-[#25D366] text-white rounded-full shadow-xl px-5 py-3 font-semibold flex items-center gap-2">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg>
-  হোয়াটসঅ্যাপ
-</a>
-
+<main id="view"></main>
+</div>
+<div class="card" id="notes"></div>
 <script>
-/* ============ এখানে আপনার তথ্য বদলান ============ */
-const WA_NUMBER = "8801737924525";               // হোয়াটসঅ্যাপ নম্বর (দেশের কোডসহ)
-const PRODUCT   = "সুন্দরবনের খাঁটি মধু";
-const PACKAGES  = [                               // ⚠ নমুনা দাম – আসল দাম বসান
-  { label:"৫০০ গ্রাম", price:450,  note:"প্রথমবার চেখে দেখার জন্য" },
-  { label:"১ কেজি",    price:850,  note:"সবচেয়ে জনপ্রিয়", best:true },
-  { label:"২ কেজি",    price:1650, note:"পরিবারের জন্য, সাশ্রয়ী" }
-];
-const REVIEWS = [                                 // ⚠ নমুনা – আসল ক্রেতার মন্তব্য বসান
-  { text:"এখানে প্রথম আসল ক্রেতার মন্তব্য বসবে।", who:"ক্রেতার নাম, এলাকা" },
-  { text:"এখানে দ্বিতীয় আসল ক্রেতার মন্তব্য বসবে।", who:"ক্রেতার নাম, এলাকা" },
-  { text:"এখানে তৃতীয় আসল ক্রেতার মন্তব্য বসবে।", who:"ক্রেতার নাম, এলাকা" }
-];
-/* ================================================= */
+const $=s=>document.querySelector(s);
+const bn=n=>Math.round(n).toLocaleString('bn-BD');
+const tk=n=>(n<0?'−':'')+'৳'+bn(Math.abs(n));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
 
+/* ===== ডেমো ডেটা — আসল ডেটা এখানে বসাবেন ===== */
+// [নাম, ক্যাটাগরি, বিক্রয় মূল্য, ক্রয় মূল্য, স্টক, ন্যূনতম স্টক]
+const products=[
+['সুন্দরবনের খলিশা মধু ৫০০ গ্রাম','মধু',650,440,42,15],
+['কালোজিরা ফুলের মধু ৫০০ গ্রাম','মধু',550,370,8,15],
+['কাঠের ঘানির সরিষার তেল ১ লিটার','তেল',340,255,56,20],
+['এক্সট্রা ভার্জিন নারিকেল তেল ২৫০ মিলি','তেল',380,260,0,10],
+['পাবনার গাওয়া ঘি ৫০০ গ্রাম','ঘি ও দুগ্ধ',850,630,6,12],
+['আজওয়া খেজুর ৫০০ গ্রাম','খেজুর ও বাদাম',750,540,31,10],
+['মেডজুল খেজুর ৫০০ গ্রাম','খেজুর ও বাদাম',900,680,18,10],
+['মিক্সড বাদাম ৫০০ গ্রাম','খেজুর ও বাদাম',780,570,24,10],
+['কালোজিরার তেল ১০০ মিলি','তেল',280,170,37,10],
+['হাতে ভাঙা হলুদ গুঁড়া ২০০ গ্রাম','মসলা',160,95,64,20],
+['লাল চাল (ঢেঁকি ছাঁটা) ৫ কেজি','চাল ও শস্য',520,410,4,10],
+['খেজুরের পাটালি গুড় ১ কেজি','গুড়',420,300,29,15]];
+// [নাম, জেলা, ফোন, আগের অর্ডার সংখ্যা]
+const customers=[
+['নুসরাত জাহান','ঢাকা','01700-000101',6],['মাহমুদুল হাসান','চট্টগ্রাম','01800-000102',3],['ফারজানা আক্তার','রাজশাহী','01900-000103',0],
+['তানভীর আহমেদ','সিলেট','01600-000104',2],['সাদিয়া ইসলাম','খুলনা','01500-000105',0],['রাকিবুল ইসলাম','বগুড়া','01300-000106',4],
+['শারমিন সুলতানা','ঢাকা','01700-000107',1],['আব্দুল্লাহ আল মামুন','রংপুর','01800-000108',0],['মেহজাবিন চৌধুরী','ঢাকা','01900-000109',8],
+['ইমরান খান','গাজীপুর','01600-000110',0],['রুবিনা পারভীন','বরিশাল','01500-000111',2],['জাহিদ হাসান','কুমিল্লা','01300-000112',0]];
+// [কাস্টমার, [[পণ্য, পরিমাণ]], স্ট্যাটাস, পেমেন্ট হয়েছে?, পদ্ধতি, সময়]
+const raw=[
+[0,[[0,2],[5,1]],'Pending',1,'bKash','৪:৫২ PM'],[1,[[2,3]],'Pending',0,'ক্যাশ অন ডেলিভারি','৪:১০ PM'],
+[2,[[4,1],[9,2]],'Processing',1,'Nagad','৩:৩৫ PM'],[3,[[7,1]],'Pending',0,'ক্যাশ অন ডেলিভারি','২:৪৮ PM'],
+[4,[[0,1],[8,1]],'Delivered',1,'bKash','১:৫৫ PM'],[5,[[11,2]],'Cancelled',0,'ক্যাশ অন ডেলিভারি','১:২০ PM'],
+[6,[[6,1],[2,1]],'Shipped',1,'কার্ড','১২:৩০ PM'],[7,[[10,1]],'Pending',0,'ক্যাশ অন ডেলিভারি','১১:৪৫ AM'],
+[8,[[0,2],[4,1]],'Delivered',1,'bKash','১১:০৫ AM'],[9,[[1,1]],'Returned',0,'ক্যাশ অন ডেলিভারি','১০:২০ AM'],
+[10,[[5,2]],'Delivered',1,'Nagad','৯:৪০ AM'],[11,[[2,2],[9,1]],'Processing',0,'ক্যাশ অন ডেলিভারি','৯:০৫ AM']];
+const orders=raw.map((o,i)=>({id:'HO-'+(1062-i),c:o[0],items:o[1].map(([p,q])=>[p,q,products[p][2],products[p][3]]),status:o[2],paid:!!o[3],method:o[4],time:o[5]}));
+const expenses=[['ফেসবুক বিজ্ঞাপন','মার্কেটিং',900],['প্যাকেজিং বক্স ও বয়াম','প্যাকেজিং',650],['কুরিয়ার চার্জ','ডেলিভারি',720],['দোকানের বিদ্যুৎ ও ইন্টারনেট','ইউটিলিটি',250]];
+const coupons=[['HALAL10','১০% ছাড়','৩০ নভেম্বর ২০২৬',1],['WINTERMODHU','মধুতে ৳৫০ ছাড়','১৫ ডিসেম্বর ২০২৬',1],['EIDGIFT','১৫% ছাড়','৩০ মে ২০২৬',0]];
+const reviews=[['মেহজাবিন চৌধুরী',0,5,'মধুর ঘ্রাণ আর স্বাদ দুটোই চমৎকার।','২৭ নভেম্বর'],['রাকিবুল ইসলাম',2,4,'তেল ভালো, ডেলিভারি একদিন দেরি হয়েছে।','২৬ নভেম্বর'],['তানভীর আহমেদ',4,5,'আসল গাওয়া ঘি, আবার নেব।','২৪ নভেম্বর'],['রুবিনা পারভীন',5,3,'খেজুর ভালো কিন্তু প্যাকেট কিছুটা চাপা ছিল।','২২ নভেম্বর']];
+const week=[['রবি ২২',11850],['সোম ২৩',9420],['মঙ্গল ২৪',13180],['বুধ ২৫',10760],['বৃহঃ ২৬',15240],['শুক্র ২৭',17890]];
+const months=[['জুন',214000],['জুলাই',238500],['আগস্ট',226300],['সেপ্টে',271800],['অক্টো',304600]];
+const novBefore=298400; // ১–২১ নভেম্বর
+const shop={name:'হালাল অর্গানিক',phone:'01700-000000',delivery:80};
 
-const bn = n => String(n).replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
-const $ = id => document.getElementById(id);
-
-const GALLERY=[["honey","খাঁটি মধু"],["blackseed","কালোজিরা সরিষার মধু"],["jaggery","খেজুরগুড়"],["ghee","খাঁটি দেশি ঘি"],["mustard","খাঁটি সরিষার তেল"],["boroi","বড়ই আচার"],["roshun","রসুন আচার"],["tetul","তেঁতুল আচার"],["mix-achar","মিক্স আচার"],["ilish","ইলিশ আচার"],["aam","আম আচার"],["shrimp","চিংড়ি বালাচাও"],["mixbalachao","মিক্স বালাচাও"],["combo","কম্বো প্যাকেজ"]];
-$("gallery").innerHTML=GALLERY.map(([f,n])=>`<a target="_blank" rel="noopener" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("আমি "+n+" কিনতে চাই। দাম জানাবেন।")}" class="card bg-white border border-honey/30 rounded-2xl overflow-hidden block hover:shadow-lg"><img src="images/p-${f}.jpg" alt="${n}" loading="lazy" class="w-full aspect-square object-cover"><div class="p-3 text-center font-semibold">${n}</div></a>`).join("");
-
-
-$("pkgs").innerHTML = PACKAGES.map((p,i) => `
-  <div class="card bg-white rounded-2xl p-6 text-center border-2 ${p.best?'border-leaf shadow-lg':'border-honey/30'}">
-    ${p.best?'<div class="text-xs font-semibold text-leaf mb-1">সবচেয়ে বেশি বিক্রি</div>':''}
-    <h3 class="font-head font-extrabold text-2xl">${p.label}</h3>
-    <p class="text-3xl font-extrabold text-amber2 mt-2">৳ ${bn(p.price)}</p>
-    <p class="muted text-sm mt-2 text-bark/70">${p.note}</p>
-    <a href="#order" data-i="${i}" class="pick inline-block mt-4 bg-leaf text-white font-semibold px-6 py-2.5 rounded-full">এটি নিন</a>
-  </div>`).join("");
-
-$("reviews").innerHTML = REVIEWS.map(r => `
-  <figure class="card bg-white rounded-2xl p-5 border border-honey/30">
-    <blockquote class="text-bark/85">${r.text}</blockquote>
-    <figcaption class="mt-3 font-semibold text-sm text-leaf">${r.who}</figcaption>
-  </figure>`).join("");
-
-$("pkg").innerHTML = PACKAGES.map((p,i) => `<option value="${i}">${p.label} – ৳${bn(p.price)}</option>`).join("");
-$("pkg").value = PACKAGES.findIndex(p => p.best);
-document.querySelectorAll(".pick").forEach(a => a.addEventListener("click", () => { $("pkg").value = a.dataset.i; calc(); }));
-
+/* ===== হিসাব ===== */
+const labels={Pending:['অপেক্ষমাণ','amber'],Processing:['প্রসেসিং',''],Shipped:['পাঠানো হয়েছে',''],Delivered:['ডেলিভারড','green'],Cancelled:['বাতিল','red'],Returned:['ফেরত','red']};
+const badge=(t,c)=>`<span class="badge ${c}">${t}</span>`;
+const total=o=>o.items.reduce((s,[,q,price])=>s+price*q,0);
+const live=o=>!['Cancelled','Returned'].includes(o.status);
 function calc(){
-  const p = PACKAGES[$("pkg").value];
-  const q = Math.max(1, parseInt($("qty").value) || 1);
-  const sub = p.price * q, ship = parseInt($("area").value);
-  $("sub").textContent = "৳" + bn(sub);
-  $("ship").textContent = "৳" + bn(ship);
-  $("total").textContent = "৳" + bn(sub + ship);
-  return { p, q, sub, ship, total: sub + ship };
+ const ok=orders.filter(live),sales=ok.reduce((s,o)=>s+total(o),0);
+ const cost=ok.reduce((s,o)=>s+o.items.reduce((a,[,q,,b])=>a+q*b,0),0);
+ const exp=expenses.reduce((s,e)=>s+e[2],0);
+ const sold=products.map((p,i)=>[i,ok.reduce((s,o)=>s+o.items.filter(x=>x[0]==i).reduce((a,x)=>a+x[1],0),0)]).sort((a,b)=>b[1]-a[1]);
+ const paid=ok.filter(o=>o.paid).reduce((s,o)=>s+total(o),0);
+ return{ok,sales,cost,exp,profit:sales-cost-exp,sold,paid,due:sales-paid,
+ pending:orders.filter(o=>o.status=='Pending').length,
+ low:products.filter(p=>p[4]<=p[5]).sort((a,b)=>a[4]-b[4]),
+ fresh:orders.filter(o=>customers[o.c][3]==0).length}
 }
-["pkg","qty","area"].forEach(id => $(id).addEventListener("input", calc));
-calc();
 
-$("wa").href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent("আসসালামু আলাইকুম, আমি " + PRODUCT + " সম্পর্কে জানতে চাই।");
+/* ===== উপাদান ===== */
+const card=(title,body,extra='')=>`<section class="card"><div class="head"><h2>${title}</h2>${extra}</div>${body}</section>`;
+const table=(h,rows)=>`<div class="scroll"><table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr data-s>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')||`<tr><td colspan="${h.length}">কিছু নেই</td></tr>`}</tbody></table></div>`;
+const stats=a=>`<div class="grid g4">${a.map(([l,v,n])=>`<div class="card stat"><span>${l}</span><b>${v}</b><small class="${String(n).includes('▼')?'down':''}">${n||''}</small></div>`).join('')}</div>`;
+const list=a=>a.map(([l,r])=>`<div class="row" data-s><span>${l}</span><span>${r}</span></div>`).join('')||'<p class="mu">কিছু নেই</p>';
+const progress=(l,v,max,t)=>`<div class="row" data-s><div style="flex:1">${l}<div class="bar"><i style="width:${max?v/max*100:0}%"></i></div></div><b>${t}</b></div>`;
+function chart(data){
+ const max=Math.max(...data.map(d=>d[1]))*1.15||1,W=600,w=W/data.length;
+ return `<svg viewBox="0 0 ${W} 230" width="100%" role="img" aria-label="বিক্রির গ্রাফ">${data.map(([l,v],i)=>{const h=v/max*180,x=i*w+w*.2;return `<rect x="${x}" y="${200-h}" width="${w*.6}" height="${h}" rx="5" fill="var(--p)" opacity="${i==data.length-1?1:.45}"><title>${l}: ${tk(v)}</title></rect><text x="${x+w*.3}" y="${193-h}" text-anchor="middle">${bn(v/1000)}হা</text><text x="${x+w*.3}" y="220" text-anchor="middle">${l}</text>`}).join('')}</svg>`
+}
+let range='week';
+function salesCard(){
+ const c=calc(),w=[...week,['আজ ২৮',c.sales]];
+ const nov=novBefore+w.reduce((s,d)=>s+d[1],0);
+ const tabs=`<div><button class="btn alt" data-range="week">${range=='week'?'✓ ':''}দৈনিক</button> <button class="btn alt" data-range="month">${range=='month'?'✓ ':''}মাসিক</button></div>`;
+ return card('বিক্রির বিশ্লেষণ',chart(range=='week'?w:[...months,['নভে*',nov]])+`<p class="mu">${range=='week'?'গত ৭ দিন (হা = হাজার টাকা)':'গত ৬ মাস · *নভেম্বর ২৮ তারিখ পর্যন্ত'}</p>`,tabs)
+}
+function orderTable(list_,edit){
+ return table(['অর্ডার','কাস্টমার','পণ্য','মোট','সময়','স্ট্যাটাস'],list_.map(o=>[`<b>${o.id}</b>`,customers[o.c][0],o.items.map(([p,q])=>`${products[p][0]} × ${bn(q)}`).join('<br>'),tk(total(o)),o.time,
+ edit?`<select data-order="${o.id}" aria-label="স্ট্যাটাস">${Object.entries(labels).map(([k,v])=>`<option value="${k}" ${k==o.status?'selected':''}>${v[0]}</option>`).join('')}</select> ${badge(...labels[o.status])}`:badge(...labels[o.status])]))
+}
+const stockBadge=p=>p[4]==0?badge('স্টক শেষ','red'):p[4]<=p[5]?badge('কম স্টক','amber'):badge('পর্যাপ্ত','green');
+const lowList=c=>list(c.low.map(p=>[p[0],badge(p[4]?bn(p[4])+'টি বাকি':'শেষ',p[4]?'amber':'red')]));
+function tips(c){
+ const t=[];
+ if(c.low.length)t.push(`📦 ${bn(c.low.length)}টি পণ্যের স্টক কম। আগে "${c.low[0][0]}" অর্ডার করুন।`);
+ if(c.pending)t.push(`⏱️ ${bn(c.pending)}টি অর্ডার অপেক্ষায় আছে। কাস্টমারকে ফোন করে কনফার্ম করুন।`);
+ if(c.due)t.push(`💰 ${tk(c.due)} এখনো আদায় হয়নি। ডেলিভারির পর কুরিয়ারের হিসাব মিলিয়ে নিন।`);
+ if(c.sold[0][1])t.push(`⭐ আজ "${products[c.sold[0][0]][0]}" সবচেয়ে বেশি চলছে। এটি দিয়ে অফার বা বিজ্ঞাপন দিতে পারেন।`);
+ return list(t.map(x=>[x,'']))
+}
+const topList=c=>{const s=c.sold.filter(x=>x[1]).slice(0,5);return s.map(([i,q])=>progress(products[i][0],q,s[0][1],bn(q)+'টি')).join('')||'<p class="mu">আজ বিক্রি নেই</p>'};
+const payCard=c=>progress('Paid (আদায় হয়েছে)',c.paid,c.sales,tk(c.paid))+progress('Unpaid (বাকি)',c.due,c.sales,tk(c.due));
+const custCard=c=>progress('নতুন কাস্টমার',c.fresh,orders.length,bn(c.fresh)+' জন')+progress('পুরাতন কাস্টমার',orders.length-c.fresh,orders.length,bn(orders.length-c.fresh)+' জন');
+const returns=()=>orders.filter(o=>!live(o));
 
-$("send").addEventListener("click", () => {
-  const name = $("name").value.trim(), phone = $("phone").value.trim(), addr = $("addr").value.trim();
-  if (!name || !phone || !addr) {
-    $("err").textContent = "নাম, মোবাইল নম্বর ও ঠিকানা লিখুন।";
-    $("err").classList.remove("hidden"); return;
-  }
-  $("err").classList.add("hidden");
-  const o = calc();
-  const areaTxt = o.ship === 80 ? "ঢাকার ভেতরে" : "ঢাকার বাইরে";
-  const msg = [
-    "*নতুন অর্ডার – SHAHIN ORGANIK FOOD*",
-    "পণ্য: " + PRODUCT,
-    "প্যাকেজ: " + o.p.label + " × " + bn(o.q),
-    "পণ্যের দাম: ৳" + bn(o.sub),
-    "ডেলিভারি (" + areaTxt + "): ৳" + bn(o.ship),
-    "*মোট: ৳" + bn(o.total) + "*",
-    "",
-    "নাম: " + name,
-    "মোবাইল: " + phone,
-    "ঠিকানা: " + addr
-  ].join("\n");
-  window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg), "_blank");
+/* ===== পেজ ===== */
+const pages={
+dashboard:['🏠','ড্যাশবোর্ড',c=>{
+ const diff=(c.sales-week[5][1])/week[5][1]*100;
+ return `<p class="sub">শনিবার, ২৮ নভেম্বর ২০২৬ · আজ <b>${bn(orders.length)}টি</b> অর্ডার, <b>${bn(c.pending)}টি</b> অপেক্ষমাণ, <b>${bn(c.low.length)}টি</b> পণ্যের স্টক কম</p>`+
+ stats([['আজকের বিক্রি',tk(c.sales),`গতকালের চেয়ে ${bn(Math.abs(diff))}% ${diff<0?'কম ▼':'বেশি ▲'}`],['আজকের অর্ডার',bn(orders.length),`নতুন কাস্টমার ${bn(c.fresh)} জন`],['নিট লাভ (আনুমানিক)',tk(c.profit),'বিক্রি − পণ্যের দাম − খরচ'],['পেন্ডিং অর্ডার',bn(c.pending),'প্রসেসিংয়ের অপেক্ষায়']])+
+ `<div class="grid g2">${salesCard()}${card('⚠️ স্টক সতর্কতা',lowList(c))}</div>`+
+ `<div class="grid">${card('সাম্প্রতিক অর্ডার',orderTable(orders.slice(0,6)),'<button class="btn alt" data-go="orders">সব দেখুন</button>')}</div>`+
+ `<div class="grid g3">${card('সেরা বিক্রিত পণ্য (আজ)',topList(c))}${card('পেমেন্ট ওভারভিউ',payCard(c))}${card('কাস্টমার (আজকের অর্ডার)',custCard(c))}</div>`+
+ `<div class="grid g3">${card('আজকের খরচ',list(expenses.map(e=>[esc(e[0]),tk(e[2])]))+list([['<b>মোট</b>',`<b>${tk(c.exp)}</b>`]]))}${card('রিটার্ন ও ক্যানসেল',list(returns().map(o=>[`${o.id} · ${customers[o.c][0]}`,badge(...labels[o.status])])))}${card('💡 স্মার্ট বিজনেস টিপস',tips(c))}</div>`}],
+orders:['🧾','অর্ডার',c=>card('আজকের অর্ডার — স্ট্যাটাস পরিবর্তন করতে পারবেন',orderTable(orders,true))],
+products:['🍯','পণ্য',c=>card('পণ্য যোগ ও সম্পাদনা',`<form id="addP"><input class="field" name="n" placeholder="পণ্যের নাম" required><input class="field" name="c" placeholder="ক্যাটাগরি" required><input class="field" name="s" type="number" min="1" placeholder="বিক্রয় মূল্য ৳" required><input class="field" name="b" type="number" min="0" placeholder="ক্রয় মূল্য ৳" required><input class="field" name="q" type="number" min="0" placeholder="স্টক" required><button class="btn">+ যোগ করুন</button></form>`+table(['পণ্য','ক্যাটাগরি','দাম','স্টক',''],products.map((p,i)=>[esc(p[0]),esc(p[1]),tk(p[2]),bn(p[4]),`<button class="btn alt" data-price="${i}">দাম বদলান</button>`])))],
+categories:['🗂️','ক্যাটাগরি',c=>card('পণ্যের ক্যাটাগরি',table(['ক্যাটাগরি','পণ্য সংখ্যা','মোট স্টক'],[...new Set(products.map(p=>p[1]))].map(k=>{const a=products.filter(p=>p[1]==k);return[esc(k),bn(a.length),bn(a.reduce((s,p)=>s+p[4],0))]})))],
+inventory:['📦','ইনভেন্টরি',c=>card('স্টক ম্যানেজমেন্ট',table(['পণ্য','স্টক','ন্যূনতম','অবস্থা',''],products.map((p,i)=>[esc(p[0]),bn(p[4]),bn(p[5]),stockBadge(p),`<button class="btn alt" data-stock="${i}">+১০ যোগ</button>`])))],
+customers:['👥','কাস্টমার',c=>card('কাস্টমার তালিকা',table(['নাম','জেলা','ফোন','মোট অর্ডার','ধরন'],customers.map((x,i)=>[x[0],x[1],x[2],bn(x[3]+orders.filter(o=>o.c==i).length),x[3]?badge('পুরাতন',''):badge('নতুন','green')])))],
+analytics:['📈','অ্যানালিটিক্স',c=>`<div class="grid">${salesCard()}</div><div class="grid g2">${card('সেরা বিক্রিত পণ্য (আজ)',topList(c))}${card('কাস্টমার ইনসাইট',custCard(c))}</div>`],
+payments:['💳','পেমেন্ট',c=>`<div class="grid">${card('পেমেন্ট ওভারভিউ',payCard(c))}${card('লেনদেন',table(['অর্ডার','পদ্ধতি','পরিমাণ','অবস্থা'],c.ok.map(o=>[o.id,o.method,tk(total(o)),o.paid?badge('Paid','green'):`${badge('Unpaid','amber')} <button class="btn alt" data-pay="${o.id}">আদায় হয়েছে</button>`])))}</div>`],
+expenses:['💸','খরচ',c=>card('আজকের খরচ — মোট '+tk(c.exp),`<form id="addE"><input class="field" name="n" placeholder="খরচের বিবরণ" required><input class="field" name="c" placeholder="ধরন" required><input class="field" name="a" type="number" min="1" placeholder="টাকা" required><button class="btn">+ যোগ করুন</button></form>`+table(['বিবরণ','ধরন','পরিমাণ'],expenses.map(e=>[esc(e[0]),esc(e[1]),tk(e[2])])))],
+coupons:['🎟️','কুপন',c=>card('ডিসকাউন্ট ও অফার',table(['কোড','অফার','মেয়াদ','অবস্থা'],coupons.map(x=>[`<b>${x[0]}</b>`,x[1],x[2],x[3]?badge('চালু','green'):badge('মেয়াদ শেষ','red')])))],
+reviews:['⭐','রিভিউ',c=>card('কাস্টমার রিভিউ',reviews.map(r=>`<div class="row" data-s><div><b>${r[0]}</b> <span style="color:#d97706">${'★'.repeat(r[2])}${'☆'.repeat(5-r[2])}</span><br>${r[3]}<br><small class="mu">${products[r[1]][0]} · ${r[4]}</small></div></div>`).join(''))],
+notifications:['🔔','নোটিফিকেশন',c=>card('গুরুত্বপূর্ণ অ্যালার্ট',list(alerts(c).map(a=>[a,''])))],
+settings:['⚙️','সেটিংস',c=>card('ব্যবসার সেটিংস',`<form id="set" style="flex-direction:column;max-width:380px"><label>দোকানের নাম<br><input class="field" style="width:100%" name="n" value="${esc(shop.name)}" required></label><label>ফোন<br><input class="field" style="width:100%" name="p" value="${esc(shop.phone)}"></label><label>ডেলিভারি চার্জ (৳)<br><input class="field" style="width:100%" name="d" type="number" min="0" value="${shop.delivery}"></label><button class="btn">সংরক্ষণ করুন</button></form><p class="mu" id="saved">ডেমো: পেজ রিফ্রেশ করলে পরিবর্তন মুছে যাবে।</p>`)]
+};
+const alerts=c=>[...c.low.map(p=>`📦 ${esc(p[0])} — ${p[4]?'মাত্র '+bn(p[4])+'টি বাকি':'স্টক শেষ'}`),...orders.filter(o=>o.status=='Pending').map(o=>`🧾 ${o.id} অর্ডার অপেক্ষমাণ (${customers[o.c][0]})`)];
+
+let page='dashboard';
+function render(){
+ const c=calc(),[,name,fn]=pages[page];
+ $('#nav').innerHTML=Object.entries(pages).map(([k,v])=>`<button data-go="${k}" class="${k==page?'on':''}"><span>${v[0]}</span>${v[1]}</button>`).join('');
+ $('#view').innerHTML=`<h1>${name}</h1>${page=='dashboard'?'':'<p class="sub">'+esc(shop.name)+'</p>'}`+fn(c);
+ const a=alerts(c);$('#count').textContent=bn(a.length);
+ $('#notes').innerHTML=`<h2>নোটিফিকেশন</h2>${a.slice(0,5).map(x=>`<div class="row">${x}</div>`).join('')}<br><button class="btn alt" data-go="notifications">সব দেখুন</button>`;
+ filter();
+}
+function filter(){const q=$('#search').value.trim().toLowerCase();document.querySelectorAll('#view [data-s]').forEach(e=>e.style.display=e.textContent.toLowerCase().includes(q)?'':'none')}
+function theme(d){document.body.classList.toggle('dark',d);$('#theme').textContent=d?'☀️':'🌙'}
+
+document.addEventListener('click',e=>{
+ if(!e.target.closest('#bell,#notes'))$('#notes').style.display='none';
+ const b=e.target.closest('button');
+ if(e.target.id=='shade')document.body.classList.remove('open');
+ if(!b)return;const d=b.dataset;
+ if(b.id=='menu')document.body.classList.toggle('open');
+ else if(b.id=='bell')$('#notes').style.display=$('#notes').style.display=='block'?'none':'block';
+ else if(b.id=='theme'){const v=!document.body.classList.contains('dark');theme(v);try{localStorage.setItem('ho-dark',v?1:0)}catch(x){}}
+ else if(d.go){page=d.go;$('#search').value='';$('#notes').style.display='none';document.body.classList.remove('open');render();scrollTo(0,0)}
+ else if(d.range){range=d.range;render()}
+ else if(d.stock){products[d.stock][4]+=10;render()}
+ else if(d.pay){orders.find(o=>o.id==d.pay).paid=true;render()}
+ else if(d.price){const p=products[d.price],v=Number(prompt('নতুন বিক্রয় মূল্য (৳)',p[2]));if(v>0){p[2]=v;render()}}
 });
+document.addEventListener('change',e=>{const id=e.target.dataset.order;if(id){orders.find(o=>o.id==id).status=e.target.value;render()}});
+document.addEventListener('submit',e=>{
+ e.preventDefault();const f=Object.fromEntries(new FormData(e.target));
+ if(e.target.id=='addP'){products.push([f.n,f.c,+f.s,+f.b,+f.q,10]);render()}
+ if(e.target.id=='addE'){expenses.push([f.n,f.c,+f.a]);render()}
+ if(e.target.id=='set'){Object.assign(shop,{name:f.n,phone:f.p,delivery:+f.d});$('.logo').textContent='🌿 '+f.n;render();$('#saved').textContent='✓ সংরক্ষিত হয়েছে (রিফ্রেশ করা পর্যন্ত)'}
+});
+$('#search').addEventListener('input',filter);
+try{theme(localStorage.getItem('ho-dark')=='1')}catch(x){}
+render();
 </script>
 </body>
 </html>
